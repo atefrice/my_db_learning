@@ -1,0 +1,54 @@
+
+
+增删改查
+
+数据库：
+CREATE DATABASE wifi_exp;         # 创建数据库
+DROP DATABASE wifi_exp;           # 删除数据库
+USE wifi_exp;                     # 进入该数据库视图
+
+
+数据表：                          #创建数据表
+CREATE TABLE ssid_passwd (
+id INT NOT NULL AUTO_INCREMENT, 
+essid VARCHAR(18), 
+passwd VARCHAR(32), 
+bssid VARCHAR(18), 
+PRIMARY KEY(id)) AUTO_INCREMENT=1;
+
+desc ssid_passwd;                # 查询该数据表 数据结构信息
+
+插入 ITEM 项
+INSERT INTO ssid_passwd (essid, passwd, bssid)  
+VALUES ("luyouqi", "38988061", "50:BD:5F:DB:96:20");
+
+INSERT INTO ssid_passwd (essid, bssid, ivs_pkt_path, ch_id)
+VALUES ("GQW", "84:76:37:1C:53:9C", "/root/test_GQW-02.ivs", 6);
+
+INSERT INTO ssid_passwd (essid, bssid, ivs_pkt_path, ch_id)
+VALUES ("Scy", "28:6C:07:5A:9F:CB", "/root/test_Scy-02.ivs", 1);
+
+
+
+数据表中 添加新项
+ALTER TABLE ssid_passwd ADD COLUMN ivs_pkt_path VARCHAR(64) DEFAULT "/root/";
+ALTER TABLE ssid_passwd ADD COLUMN channel_id VARCHAR(2);
+更改数据项
+ALTER TABLE ssid_passwd CHANGE COLUMN channel_id ch_id INT ;
+删除数据项
+ALTER TABLE ssid_passwd DROP COLUMN ch_id;
+
+
+更新数据库项
+UPDATE ssid_passwd SET ivs_pkt_path="/root/test-02.ivs", ch_id=1 where essid="luyouqi";
+
+
+查询
+LIKE 'ate%'  LIKE 'ate_____'
+BETWEEN 100 AND 200
+IN ("author", "direct", "actor")     -- 括号内同类型
+IS NULL          ------只能判断 NULL
+<=>  安全等于    ------可判断任何类型
+
+
+
